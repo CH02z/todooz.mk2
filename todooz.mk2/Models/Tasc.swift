@@ -14,7 +14,9 @@ class Tasc {
     //Non-Optional Properties
     var id: UUID
     var title: String
-    var category: Category
+    
+    
+    var category: Category?
     var dateCreated: Date
     
     var isDone: Bool

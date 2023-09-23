@@ -29,7 +29,7 @@ class Category {
          iconColor: String,
          icon: String,
          dateCreated: Date = Date(),
-         tasks: [Tasc]? = nil
+         tasks: [Tasc]? = []
     ) {
         self.id = UUID()
         self.name = name

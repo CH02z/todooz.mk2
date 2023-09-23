@@ -12,6 +12,8 @@ struct HomeView: View {
     
     @AppStorage("accentColor") private var accentColor = "B35AEF"
     
+    @State private var showAddCategorySheet: Bool = false
+    
     
     var body: some View {
         NavigationStack {
@@ -24,6 +26,8 @@ struct HomeView: View {
                     .padding()
                 Spacer()
                 
+                CategoryListView()
+                
                 
                 
                 
@@ -32,6 +36,12 @@ struct HomeView: View {
                 
                 
             }
+            .sheet(isPresented: $showAddCategorySheet) {
+                AddCategoryView()
+                    .interactiveDismissDisabled()
+            }
+            
+            
             .navigationTitle("Tasks")
             .toolbar {
                 
@@ -67,6 +77,7 @@ struct HomeView: View {
                         //Haptic Feedback on Tap
                         let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
                         impactHeavy.impactOccurred()
+                        self.showAddCategorySheet.toggle()
                         
                         
                     } label: {
