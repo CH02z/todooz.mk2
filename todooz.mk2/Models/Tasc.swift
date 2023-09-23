@@ -12,6 +12,7 @@ import SwiftData
 class Tasc {
     
     //Non-Optional Properties
+    var id: UUID
     var title: String
     var category: Category
     var dateCreated: Date
@@ -49,6 +50,7 @@ class Tasc {
          subtasks: [Subtasc]? = nil
          
     ) {
+        self.id = UUID()
         self.title = title
         self.category = category
         self.dateCreated = dateCreated

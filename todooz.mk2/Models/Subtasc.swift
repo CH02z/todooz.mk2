@@ -10,6 +10,7 @@ import SwiftData
 
 @Model
 class Subtasc {
+    var id: UUID
     var title: String
     var isDone: Bool
     
@@ -17,6 +18,7 @@ class Subtasc {
    
     
     init(title: String, isDone: Bool = false, tasc: Tasc) {
+        self.id = UUID()
         self.title = title
         self.isDone = isDone
         self.tasc = tasc

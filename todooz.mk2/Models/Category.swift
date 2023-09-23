@@ -11,6 +11,7 @@ import SwiftData
 @Model
 class Category {
     
+    var id: UUID
     var name: String
     var dscription: String
     var iconColor: String
@@ -30,6 +31,7 @@ class Category {
          dateCreated: Date = Date(),
          tasks: [Tasc]? = nil
     ) {
+        self.id = UUID()
         self.name = name
         self.dscription = dscription
         self.iconColor = iconColor
