@@ -14,6 +14,9 @@
 		837692F82ABDC8B600EFCC78 /* Tasc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692F72ABDC8B600EFCC78 /* Tasc.swift */; };
 		837693162ABDC99900EFCC78 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837693152ABDC99900EFCC78 /* Category.swift */; };
 		837693182ABDC9C600EFCC78 /* Subtasc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837693172ABDC9C600EFCC78 /* Subtasc.swift */; };
+		8376931B2ABEE91900EFCC78 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8376931A2ABEE91900EFCC78 /* Extensions.swift */; };
+		8376931E2ABEEB2500EFCC78 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8376931D2ABEEB2500EFCC78 /* NotificationService.swift */; };
+		837693202ABEEB4C00EFCC78 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8376931F2ABEEB4C00EFCC78 /* TestData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		837692F72ABDC8B600EFCC78 /* Tasc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasc.swift; sourceTree = "<group>"; };
 		837693152ABDC99900EFCC78 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		837693172ABDC9C600EFCC78 /* Subtasc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtasc.swift; sourceTree = "<group>"; };
+		8376931A2ABEE91900EFCC78 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8376931D2ABEEB2500EFCC78 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		8376931F2ABEEB4C00EFCC78 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,8 @@
 		837692E72ABDC88600EFCC78 /* todooz.mk2 */ = {
 			isa = PBXGroup;
 			children = (
+				8376931C2ABEEAED00EFCC78 /* Services */,
+				837693192ABEE90600EFCC78 /* Other */,
 				837692F62ABDC8A300EFCC78 /* Models */,
 				837692E82ABDC88600EFCC78 /* todooz_mk2App.swift */,
 				837692EA2ABDC88600EFCC78 /* ContentView.swift */,
@@ -82,6 +90,23 @@
 				837693172ABDC9C600EFCC78 /* Subtasc.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		837693192ABEE90600EFCC78 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				8376931A2ABEE91900EFCC78 /* Extensions.swift */,
+				8376931F2ABEEB4C00EFCC78 /* TestData.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		8376931C2ABEEAED00EFCC78 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8376931D2ABEEB2500EFCC78 /* NotificationService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +180,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				837693182ABDC9C600EFCC78 /* Subtasc.swift in Sources */,
+				8376931B2ABEE91900EFCC78 /* Extensions.swift in Sources */,
+				8376931E2ABEEB2500EFCC78 /* NotificationService.swift in Sources */,
+				837693202ABEEB4C00EFCC78 /* TestData.swift in Sources */,
 				837692EB2ABDC88600EFCC78 /* ContentView.swift in Sources */,
 				837692F82ABDC8B600EFCC78 /* Tasc.swift in Sources */,
 				837692E92ABDC88600EFCC78 /* todooz_mk2App.swift in Sources */,
