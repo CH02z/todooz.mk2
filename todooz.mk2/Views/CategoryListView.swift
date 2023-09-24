@@ -23,7 +23,7 @@ struct CategoryListView: View {
         List {
             
             ForEach(allCategories) { category in
-                NavigationLink(destination: Text("Tasklist")) {
+                NavigationLink(destination: TasklistView(selectedCategory: category)) {
                     CategoryPreviewView(category: category)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button {

@@ -15,10 +15,8 @@ class Tasc {
     var id: UUID
     var title: String
     
-    
     var category: Category?
     var dateCreated: Date
-    
     var isDone: Bool
     var isHighPriority: Bool
     var isFlagged: Bool
@@ -33,12 +31,9 @@ class Tasc {
     var reminderUnit: String?
     var reminderValue: Int?
     
-    //If Tasc is deleted, all its Subtascs will be removed too
-    @Relationship(deleteRule: .cascade, inverse: \Subtasc.tasc)
     var subtasks: [Subtasc]?
     
     init(title: String,
-         category: Category,
          dateCreated: Date = Date(),
          isDone: Bool = false,
          isHighPriority: Bool = false,
@@ -49,12 +44,11 @@ class Tasc {
          notificationID: String? = nil,
          reminderUnit: String? = nil,
          reminderValue: Int? = nil,
-         subtasks: [Subtasc]? = nil
+         subtasks: [Subtasc]? = []
          
     ) {
         self.id = UUID()
         self.title = title
-        self.category = category
         self.dateCreated = dateCreated
         self.isDone = isDone
         self.isHighPriority = isHighPriority

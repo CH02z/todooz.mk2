@@ -12,7 +12,7 @@ import SwiftData
 class Category {
     
     var id: UUID
-    var name: String
+    @Attribute(.unique) var name: String
     var dscription: String
     var iconColor: String
     var icon: String
@@ -22,14 +22,11 @@ class Category {
     @Relationship(deleteRule: .cascade, inverse: \Tasc.category)
     var tasks: [Tasc]?
     
-   
-    
     init(name: String,
          dscription: String,
          iconColor: String,
          icon: String,
-         dateCreated: Date = Date(),
-         tasks: [Tasc]? = []
+         dateCreated: Date = Date()
     ) {
         self.id = UUID()
         self.name = name
@@ -37,6 +34,16 @@ class Category {
         self.iconColor = iconColor
         self.icon = icon
         self.dateCreated = dateCreated
-        self.tasks = tasks
+    }
+    
+    static func exampl1() -> Category {
+        let category = Category(name: "Test1", dscription: "", iconColor: "3380FE", icon: "list.bullet")
+        return category
+    }
+    
+    
+    static func example2() -> Category {
+        let category = Category(name: "Test2", dscription: "", iconColor: "3380FE", icon: "list.bullet")
+        return category
     }
 }

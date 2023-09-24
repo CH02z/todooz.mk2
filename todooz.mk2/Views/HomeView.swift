@@ -19,9 +19,6 @@ struct HomeView: View {
         NavigationStack {
             
             VStack {
-                
-                //Content of Home View----------------------------------------------------------------
-                
                 StandardCategoryPreviewView()
                     .padding()
                 Spacer()
@@ -99,4 +96,6 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .modelContainer(modelCategoryPreviewContainer)
 }
+

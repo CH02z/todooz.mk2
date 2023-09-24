@@ -15,7 +15,7 @@ struct todooz_mk2App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: [Tasc.self, Category.self, Subtasc.self])
+                .modelContainer(for: [Tasc.self, Category.self])
                 .preferredColorScheme(isDarkMode ? .dark : .light)
                 .accentColor(Color(hex: accentColor))
         }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		833BC8EC2ABF052B00230204 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8EB2ABF052B00230204 /* CategoryListView.swift */; };
 		833BC8EE2ABF08EB00230204 /* PrewieSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8ED2ABF08EB00230204 /* PrewieSampleData.swift */; };
+		833BC8F02ABF139500230204 /* TasklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8EF2ABF139500230204 /* TasklistView.swift */; };
+		833BC8F22ABF15B200230204 /* addTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8F12ABF15B200230204 /* addTaskView.swift */; };
 		837692E92ABDC88600EFCC78 /* todooz_mk2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692E82ABDC88600EFCC78 /* todooz_mk2App.swift */; };
 		837692EB2ABDC88600EFCC78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692EA2ABDC88600EFCC78 /* ContentView.swift */; };
 		837692ED2ABDC88800EFCC78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 837692EC2ABDC88800EFCC78 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		833BC8EB2ABF052B00230204 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 		833BC8ED2ABF08EB00230204 /* PrewieSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrewieSampleData.swift; sourceTree = "<group>"; };
+		833BC8EF2ABF139500230204 /* TasklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasklistView.swift; sourceTree = "<group>"; };
+		833BC8F12ABF15B200230204 /* addTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTaskView.swift; sourceTree = "<group>"; };
 		837692E52ABDC88600EFCC78 /* todooz.mk2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todooz.mk2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837692E82ABDC88600EFCC78 /* todooz_mk2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todooz_mk2App.swift; sourceTree = "<group>"; };
 		837692EA2ABDC88600EFCC78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				837693242ABEF3E800EFCC78 /* StandardCategoryPreviewView.swift */,
 				837693262ABEFA3400EFCC78 /* AddCategoryView.swift */,
 				833BC8EB2ABF052B00230204 /* CategoryListView.swift */,
+				833BC8EF2ABF139500230204 /* TasklistView.swift */,
+				833BC8F12ABF15B200230204 /* addTaskView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837693232ABEEF7800EFCC78 /* HomeView.swift in Sources */,
+				833BC8F22ABF15B200230204 /* addTaskView.swift in Sources */,
 				837693182ABDC9C600EFCC78 /* Subtasc.swift in Sources */,
 				8376931B2ABEE91900EFCC78 /* Extensions.swift in Sources */,
 				8376931E2ABEEB2500EFCC78 /* NotificationService.swift in Sources */,
@@ -211,6 +218,7 @@
 				833BC8EC2ABF052B00230204 /* CategoryListView.swift in Sources */,
 				837693252ABEF3E800EFCC78 /* StandardCategoryPreviewView.swift in Sources */,
 				837692F82ABDC8B600EFCC78 /* Tasc.swift in Sources */,
+				833BC8F02ABF139500230204 /* TasklistView.swift in Sources */,
 				837692E92ABDC88600EFCC78 /* todooz_mk2App.swift in Sources */,
 				837693272ABEFA3500EFCC78 /* AddCategoryView.swift in Sources */,
 				837693162ABDC99900EFCC78 /* Category.swift in Sources */,

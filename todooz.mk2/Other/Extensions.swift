@@ -84,6 +84,30 @@ extension Date {
 }
 
 
+func getSubtractedDate(unit: String, value: Int, inputDate: Date) -> Date {
+    var calendar = Calendar.current
+    calendar.timeZone = TimeZone(abbreviation: "CEST")!
+    
+    if unit == "Days" {
+        return calendar.date(byAdding: .day, value: -value, to: inputDate)!
+    }
+    
+    if unit == "Hours" {
+        return calendar.date(byAdding: .hour, value: -value, to: inputDate)!
+    }
+    
+    if unit == "Minutes" {
+        //print("return date subtrcted by \(value) minutes")
+        //print(calendar.date(byAdding: .minute, value: -value, to: inputDate)!)
+        return calendar.date(byAdding: .minute, value: -value, to: inputDate)!
+        
+    }
+    
+    return Date()
+    
+}
+
+
 
 
 
