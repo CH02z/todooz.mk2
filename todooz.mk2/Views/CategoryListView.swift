@@ -19,11 +19,13 @@ struct CategoryListView: View {
     @State private var deleteRequest: Bool = false
     @State private var CategoryToBeDeleted: Category? = nil
     
+   
+    
     var body: some View {
         List {
             
             ForEach(allCategories) { category in
-                NavigationLink(destination: TasklistView(selectedCategory: category)) {
+                NavigationLink(destination: TasklistView(selectedCategory: category, taskListType: "category")) {
                     CategoryPreviewView(category: category)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button {
@@ -64,6 +66,15 @@ struct CategoryListView: View {
 
 struct CategoryPreviewView: View {
     
+    @Query(filter: #Predicate<Tasc> { $0.isDone == false }) private var allTascs: [Tasc]
+    
+    func getNumberOfTasksInCategory(_ cat: Category) -> Int {
+        let filteredTascs = allTascs.compactMap { tasc in
+            return (tasc.category == cat) ? tasc : nil
+        }
+        return filteredTascs.count
+    }
+    
     @Bindable var category: Category
     
     var body: some View {
@@ -83,7 +94,7 @@ struct CategoryPreviewView: View {
                 .lineLimit(2)
                 .minimumScaleFactor(0.5)
             
-            Text("0")
+            Text(String(getNumberOfTasksInCategory(category)))
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .foregroundColor(.gray)
         }

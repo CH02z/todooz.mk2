@@ -13,9 +13,7 @@ struct addTaskView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     
-    @Query(sort: [
-        SortDescriptor(\Category.dateCreated, order: .forward)
-    ], animation: .snappy) private var allCategories: [Category]
+    @Query(sort: [SortDescriptor(\Category.dateCreated, order: .forward)]) private var allCategories: [Category]
     
     
     
@@ -23,6 +21,7 @@ struct addTaskView: View {
     
     //InputCategory
     @State var originalCategory: Category
+    @State var newTasc = Tasc(title: "", notificationID: "", reminderUnit: "Hours", reminderValue: 1)
     
     
     //var EditTask: Tasc
@@ -35,41 +34,39 @@ struct addTaskView: View {
     
     //Reminder
     @State var useReminder: Bool = false
-    @State var selectedUnit: String = "Hours"
     @State var reminderUnits: [String] = ["Days", "Hours", "Minutes"]
-    @State var reminderValue: Int = 1
-    @State var notificationID: String = ""
     
     //subtaks
     @State var addedSubtaskTitle: String = ""
     @State var useSubtasks: Bool = false
     @State var subtasks: [Subtasc] = []
     
-    
-    @State var title: String = ""
-    @State var description: String = ""
-    @State var isHighPriority: Bool = false
-    @State var isFlagged: Bool = false
 
     
     func addTasc() {
-        let newTasc: Tasc = Tasc(title: self.title, dateCreated: Date(), isDone: false, isHighPriority: self.isHighPriority, isFlagged: self.isFlagged, dscription: self.description, notificationID: self.notificationID, reminderUnit: self.selectedUnit, reminderValue: self.reminderValue, subtasks: self.subtasks)
+       
         newTasc.category = self.originalCategory
+        newTasc.subtasks = self.subtasks
         
         
-        if self.letPickDate {
-            //Date with Time gets inserted
-            //"d MMM YY, HH:mm:ss"
+        
+        
+        if self.letPickDate && !self.letPickDateAndTime {
+            //Date without Time gets insertet
+            self.dueDate = self.dueDate.removeTimeStamp()
             newTasc.dueDate = self.dueDate
-            
+        }
+        
+        if self.letPickDate && self.letPickDateAndTime {
+            //Date with Time gets insertet
+            newTasc.dueDate = self.dueDate
         }
         
         if self.useReminder {
-            let notificationDate = getSubtractedDate(unit: self.selectedUnit, value: self.reminderValue, inputDate: self.dueDate)
+            let notificationDate = getSubtractedDate(unit: newTasc.reminderUnit!, value: newTasc.reminderValue!, inputDate: self.dueDate)
             //set Notification
-            self.notificationID = UUID().uuidString
-            newTasc.notificationID = self.notificationID
-            NotificationHandler.shared.scheduleNotificationWithDate(id: self.notificationID, title: "Task fällig in: \(self.reminderValue) \(self.selectedUnit)", subtitle: self.title, date: notificationDate)
+            newTasc.notificationID = UUID().uuidString
+            NotificationHandler.shared.scheduleNotificationWithDate(id: newTasc.notificationID!, title: "Task fällig in: \(newTasc.reminderValue!) \(newTasc.reminderUnit!)", subtitle: newTasc.title, date: notificationDate)
         }
         
         context.insert(newTasc)
@@ -77,7 +74,7 @@ struct addTaskView: View {
     }
     
     func formIsValid() -> Bool {
-        guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
+        guard !newTasc.title.trimmingCharacters(in: .whitespaces).isEmpty else {
             return false
         }
         
@@ -96,7 +93,7 @@ struct addTaskView: View {
     }
     
     func reminderDateisPastDate() -> Bool {
-        let notificationDate = getSubtractedDate(unit: self.selectedUnit, value: self.reminderValue, inputDate: self.dueDate)
+        let notificationDate = getSubtractedDate(unit: newTasc.reminderUnit!, value: newTasc.reminderValue!, inputDate: self.dueDate)
         return notificationDate < Date()
     }
     
@@ -109,10 +106,10 @@ struct addTaskView: View {
                 Form {
                     
                     //Title
-                    TextField("Titel", text: $title)
+                    TextField("Titel", text: $newTasc.title)
                         .submitLabel(.next)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                    if self.title.trimmingCharacters(in: .whitespaces).isEmpty {
+                    if newTasc.title.trimmingCharacters(in: .whitespaces).isEmpty {
                         HStack {
                             Image(systemName: "xmark")
                                 .foregroundColor(.red)
@@ -127,7 +124,7 @@ struct addTaskView: View {
                     }
                     
                     Section {
-                        TextField("Notizen", text: $description,  axis: .vertical)
+                        TextField("Notizen", text: $newTasc.dscription,  axis: .vertical)
                             .lineLimit(5...10)
                     }
                     
@@ -331,7 +328,7 @@ struct addTaskView: View {
                             
                             
                             if useReminder {
-                                Picker("\(selectedUnit) vorher:", selection: $selectedUnit) {
+                                Picker("\(newTasc.reminderUnit!) vorher:", selection: $newTasc.reminderUnit) {
                                     
                                     ForEach(reminderUnits, id: \.self){
                                         
@@ -343,8 +340,8 @@ struct addTaskView: View {
                                 
                             }
                             
-                            if selectedUnit == "Hours" && useReminder {
-                                Picker("", selection: $reminderValue){
+                            if newTasc.reminderUnit == "Hours" && useReminder {
+                                Picker("", selection: $newTasc.reminderValue){
                                     ForEach(1..<13, id: \.self) { i in
                                         Text("\(i)").tag(i)
                                     }
@@ -352,8 +349,8 @@ struct addTaskView: View {
                                 
                             }
                             
-                            if selectedUnit == "Minutes" && useReminder {
-                                Picker("", selection: $reminderValue){
+                            if newTasc.reminderUnit == "Minutes" && useReminder {
+                                Picker("", selection: $newTasc.reminderValue){
                                     ForEach(1..<60, id: \.self) { i in
                                         Text("\(i)").tag(i)
                                     }
@@ -361,8 +358,8 @@ struct addTaskView: View {
                                 
                             }
                             
-                            if selectedUnit == "Days" && useReminder {
-                                Picker("", selection: $reminderValue){
+                            if newTasc.reminderUnit == "Days" && useReminder {
+                                Picker("", selection: $newTasc.reminderValue){
                                     ForEach(1..<7, id: \.self) { i in
                                         Text("\(i)").tag(i)
                                     }
@@ -377,13 +374,13 @@ struct addTaskView: View {
                     
                     Section {
                         //High Priority Toggle
-                        Toggle("Hohe Priorität", isOn: $isHighPriority)
+                        Toggle("Hohe Priorität", isOn: $newTasc.isHighPriority)
                         //.padding(.vertical, 3)
                     }
                     
                     Section {
                         //Flagged Toggle
-                        Toggle("Markiert", isOn: $isFlagged)
+                        Toggle("Markiert", isOn: $newTasc.isFlagged)
                         //.padding(.vertical, 3)
                     }
                     

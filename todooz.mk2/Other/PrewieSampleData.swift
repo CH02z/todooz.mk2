@@ -34,6 +34,7 @@ let previewContainer: ModelContainer = {
             let context = container.mainContext
             context.insert(Category.exampl1())
             context.insert(Category.example2())
+            context.insert(Tasc.exampl1())
             
         }
         

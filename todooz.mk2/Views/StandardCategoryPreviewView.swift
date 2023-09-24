@@ -6,10 +6,36 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct StandardCategoryPreviewView: View {
     
     @AppStorage("accentColor") private var accentColor = "B35AEF"
+    
+    @Query(filter: #Predicate<Tasc> { $0.isDone == false },
+           sort: [
+            SortDescriptor(\Tasc.dateCreated, order: .forward)
+           ], animation: .snappy) private var allTascs: [Tasc]
+    
+    var numberOfTodayTasks: Int {
+        let filteredTascs = allTascs.compactMap { tasc in
+            if tasc.dueDate != nil {
+                return (tasc.dueDate!.isToday) ? tasc : nil
+            } else {
+                return nil
+            }
+        }
+        return filteredTascs.count
+    }
+    
+    var numberOfHighPrioTasks: Int {
+        let filteredTascs = allTascs.compactMap { tasc in
+            return (tasc.isHighPriority) ? tasc : nil
+        }
+        return filteredTascs.count
+    }
+    
+    
     
     
     var body: some View {
@@ -17,7 +43,7 @@ struct StandardCategoryPreviewView: View {
             
             //Today Section-------------------------------------------------------------------
             HStack {
-                NavigationLink(destination: Text("TodayTasks")) {
+                NavigationLink(destination: TasklistView(selectedCategory: Category(name: "Heute", dscription: "", iconColor: "", icon: ""), taskListType: "today")) {
                     HStack {
                         VStack {
                             Image(systemName: "calendar.circle")
@@ -33,7 +59,7 @@ struct StandardCategoryPreviewView: View {
                         .padding(.leading, 6)
                         
                         Spacer()
-                        Text("0")
+                        Text(String(numberOfTodayTasks))
                             .padding(.trailing, 6)
                             .font(.title)
                     }
@@ -49,7 +75,7 @@ struct StandardCategoryPreviewView: View {
                 Spacer()
                 
                 //Priority Section------------------------------------------------------------------------------------------------------------
-                NavigationLink(destination: Text("Prio")) {
+                NavigationLink(destination: TasklistView(selectedCategory: Category(name: "Hohe Priorität", dscription: "", iconColor: "", icon: ""), taskListType: "priority")) {
                     HStack {
                         VStack {
                             Image(systemName: "exclamationmark.circle")
@@ -68,7 +94,7 @@ struct StandardCategoryPreviewView: View {
                         
                         
                         Spacer()
-                        Text("0")
+                        Text(String(numberOfHighPrioTasks))
                             .padding(.trailing, 6)
                             .font(.title)
                     }
@@ -90,7 +116,7 @@ struct StandardCategoryPreviewView: View {
                 ScrollView(.horizontal) {
                     
                     HStack(spacing: 25) {
-                        NavigationLink(destination: Text("isDone")) {
+                        NavigationLink(destination: IsDoneTasklistView()) {
                             Image(systemName: "checkmark")
                                 .foregroundColor(Color(hex: accentColor))
                                 .frame(width: 40, height: 40)
@@ -102,7 +128,7 @@ struct StandardCategoryPreviewView: View {
                         .padding(.leading, 15)
                         
                     
-                        NavigationLink(destination: Text("flagged")) {
+                        NavigationLink(destination: TasklistView(selectedCategory: Category(name: "Markiert", dscription: "", iconColor: "", icon: ""), taskListType: "flagged")) {
                             Image(systemName: "flag")
                                 .foregroundColor(Color(hex: accentColor))
                                 .frame(width: 40, height: 40)
@@ -122,7 +148,7 @@ struct StandardCategoryPreviewView: View {
                                 
                         }
                         
-                        NavigationLink(destination: Text("Overdue")) {
+                        NavigationLink(destination: TasklistView(selectedCategory: Category(name: "Überfällig", dscription: "", iconColor: "", icon: ""), taskListType: "overdue")) {
                             Image(systemName: "clock.badge.exclamationmark")
                                 .foregroundColor(Color(hex: accentColor))
                                 .frame(width: 40, height: 40)
@@ -146,6 +172,9 @@ struct StandardCategoryPreviewView: View {
     }
 }
 
+
+
 #Preview {
     StandardCategoryPreviewView()
+        .modelContainer(previewContainer)
 }

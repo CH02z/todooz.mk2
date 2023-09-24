@@ -59,9 +59,8 @@ struct HomeView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: Text("Profile View")) {
-                        Image(systemName: "person.circle")
-                            .font(.system(size: 25))
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gearshape")
                     }
                     
                 }
@@ -79,8 +78,6 @@ struct HomeView: View {
                         
                     } label: {
                         Image(systemName: "plus")
-                            .font(.system(size: 25))
-                        
                     }
                     
                 }
@@ -96,6 +93,6 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
-        .modelContainer(modelCategoryPreviewContainer)
+        .modelContainer(previewContainer)
 }
 

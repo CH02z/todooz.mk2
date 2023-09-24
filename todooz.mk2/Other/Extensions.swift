@@ -50,13 +50,10 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    func removeTimeStamp() -> Date? {
+    func removeTimeStamp() -> Date {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(abbreviation: "CEST")!
-        guard let date = calendar.date(from: Calendar.current.dateComponents([.year, .month, .day], from: self)) else {
-            return nil
-        }
-        return date
+        return calendar.date(from: Calendar.current.dateComponents([.year, .month, .day], from: self))!
     }
     
     // Checking Whether the Date is Today
@@ -77,7 +74,7 @@ extension Date {
     var isPast: Bool {
         var calendar = Calendar.current
         calendar.timeZone = TimeZone(abbreviation: "CEST")!
-        return calendar.compare(self, to: .init(), toGranularity: .hour) == .orderedAscending
+        return calendar.compare(self, to: .init(), toGranularity: .minute) == .orderedAscending
     }
     
     

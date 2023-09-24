@@ -63,4 +63,9 @@ class Tasc {
         
     }
     
+    static func exampl1() -> Tasc {
+        let tasc = Tasc(title: "RPA-573 analysieren", dueDate: Date())
+        return tasc
+    }
+    
 }

@@ -11,6 +11,12 @@
 		833BC8EE2ABF08EB00230204 /* PrewieSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8ED2ABF08EB00230204 /* PrewieSampleData.swift */; };
 		833BC8F02ABF139500230204 /* TasklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8EF2ABF139500230204 /* TasklistView.swift */; };
 		833BC8F22ABF15B200230204 /* addTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8F12ABF15B200230204 /* addTaskView.swift */; };
+		833BC8F42AC05A5700230204 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8F32AC05A5700230204 /* TaskRowView.swift */; };
+		833BC8F62AC0608300230204 /* DetailTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8F52AC0608300230204 /* DetailTaskView.swift */; };
+		833BC8F82AC0741300230204 /* IsDoneTasklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8F72AC0741300230204 /* IsDoneTasklistView.swift */; };
+		833BC8FA2AC0760F00230204 /* DoneTaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8F92AC0760F00230204 /* DoneTaskRow.swift */; };
+		833BC8FC2AC07C3F00230204 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8FB2AC07C3F00230204 /* SettingsView.swift */; };
+		833BC8FE2AC07D1F00230204 /* AppIconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8FD2AC07D1F00230204 /* AppIconService.swift */; };
 		837692E92ABDC88600EFCC78 /* todooz_mk2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692E82ABDC88600EFCC78 /* todooz_mk2App.swift */; };
 		837692EB2ABDC88600EFCC78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692EA2ABDC88600EFCC78 /* ContentView.swift */; };
 		837692ED2ABDC88800EFCC78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 837692EC2ABDC88800EFCC78 /* Assets.xcassets */; };
@@ -31,6 +37,12 @@
 		833BC8ED2ABF08EB00230204 /* PrewieSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrewieSampleData.swift; sourceTree = "<group>"; };
 		833BC8EF2ABF139500230204 /* TasklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasklistView.swift; sourceTree = "<group>"; };
 		833BC8F12ABF15B200230204 /* addTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addTaskView.swift; sourceTree = "<group>"; };
+		833BC8F32AC05A5700230204 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		833BC8F52AC0608300230204 /* DetailTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskView.swift; sourceTree = "<group>"; };
+		833BC8F72AC0741300230204 /* IsDoneTasklistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsDoneTasklistView.swift; sourceTree = "<group>"; };
+		833BC8F92AC0760F00230204 /* DoneTaskRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneTaskRow.swift; sourceTree = "<group>"; };
+		833BC8FB2AC07C3F00230204 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		833BC8FD2AC07D1F00230204 /* AppIconService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconService.swift; sourceTree = "<group>"; };
 		837692E52ABDC88600EFCC78 /* todooz.mk2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todooz.mk2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837692E82ABDC88600EFCC78 /* todooz_mk2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todooz_mk2App.swift; sourceTree = "<group>"; };
 		837692EA2ABDC88600EFCC78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				8376931D2ABEEB2500EFCC78 /* NotificationService.swift */,
+				833BC8FD2AC07D1F00230204 /* AppIconService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -133,7 +146,12 @@
 				837693262ABEFA3400EFCC78 /* AddCategoryView.swift */,
 				833BC8EB2ABF052B00230204 /* CategoryListView.swift */,
 				833BC8EF2ABF139500230204 /* TasklistView.swift */,
+				833BC8F72AC0741300230204 /* IsDoneTasklistView.swift */,
 				833BC8F12ABF15B200230204 /* addTaskView.swift */,
+				833BC8F32AC05A5700230204 /* TaskRowView.swift */,
+				833BC8F92AC0760F00230204 /* DoneTaskRow.swift */,
+				833BC8F52AC0608300230204 /* DetailTaskView.swift */,
+				833BC8FB2AC07C3F00230204 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,11 +227,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				837693232ABEEF7800EFCC78 /* HomeView.swift in Sources */,
+				833BC8F62AC0608300230204 /* DetailTaskView.swift in Sources */,
 				833BC8F22ABF15B200230204 /* addTaskView.swift in Sources */,
+				833BC8F82AC0741300230204 /* IsDoneTasklistView.swift in Sources */,
+				833BC8F42AC05A5700230204 /* TaskRowView.swift in Sources */,
+				833BC8FC2AC07C3F00230204 /* SettingsView.swift in Sources */,
 				837693182ABDC9C600EFCC78 /* Subtasc.swift in Sources */,
 				8376931B2ABEE91900EFCC78 /* Extensions.swift in Sources */,
+				833BC8FA2AC0760F00230204 /* DoneTaskRow.swift in Sources */,
 				8376931E2ABEEB2500EFCC78 /* NotificationService.swift in Sources */,
 				837693202ABEEB4C00EFCC78 /* TestData.swift in Sources */,
+				833BC8FE2AC07D1F00230204 /* AppIconService.swift in Sources */,
 				837692EB2ABDC88600EFCC78 /* ContentView.swift in Sources */,
 				833BC8EC2ABF052B00230204 /* CategoryListView.swift in Sources */,
 				837693252ABEF3E800EFCC78 /* StandardCategoryPreviewView.swift in Sources */,
