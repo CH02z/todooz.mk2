@@ -75,11 +75,16 @@ struct TaskRowView: View {
                 .font(.system(size: 30))
                 .onTapGesture {
                     Task { @MainActor in
-                        isStrikeThrough.toggle()
+                        withAnimation {
+                            isStrikeThrough.toggle()
+                        }
                         try await Task.sleep(seconds: 1.0)
                         //Haptic Feedback on remove
                         let impactLight = UIImpactFeedbackGenerator(style: .light)
                         impactLight.impactOccurred()
+                        //remove Notificatin is Task is done
+                        NotificationHandler.shared.removeNotifications(ids: [tasc.notificationID ?? ""])
+                        tasc.notificationID = ""
                         tasc.isDone.toggle()
                         isStrikeThrough.toggle()
                     }

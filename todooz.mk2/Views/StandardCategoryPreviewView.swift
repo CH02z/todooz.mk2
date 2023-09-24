@@ -138,7 +138,7 @@ struct StandardCategoryPreviewView: View {
                                 
                         }
                         
-                        NavigationLink(destination: Text("scheduled")) {
+                        NavigationLink(destination: TasklistView(selectedCategory: Category(name: "Erinnerungen", dscription: "", iconColor: "", icon: ""), taskListType: "scheduled")) {
                             Image(systemName: "bell")
                                 .foregroundColor(Color(hex: accentColor))
                                 .frame(width: 40, height: 40)

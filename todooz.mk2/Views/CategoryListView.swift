@@ -22,6 +22,21 @@ struct CategoryListView: View {
    
     
     var body: some View {
+        
+        
+        if allCategories.count == 0 {
+            VStack {
+                Text("Erstelle zuerst eine Kategorie, um neue Tasks hinzuzufügen")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding(.top)
+            }
+            
+        }
+        
+        
+        
         List {
             
             ForEach(allCategories) { category in

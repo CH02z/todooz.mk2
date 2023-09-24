@@ -16,6 +16,8 @@ struct TasklistView: View {
     @State private var showAddTaskSheet: Bool = false
     @State var showDetailTaskSheet: Bool = false
     
+    @State private var selectedSortOption = SortOption.allCases.first!
+    
     @State var detailTasc: Tasc = Tasc(title: "")
     
     //InputCategory
@@ -55,6 +57,8 @@ struct TasklistView: View {
                 } else {
                     return nil
                 }
+            case "scheduled":
+                return (tasc.notificationID != "") ? tasc : nil
                 
             default:
                 return tasc
@@ -62,7 +66,7 @@ struct TasklistView: View {
             }
             
         }
-        return filteredTascs
+        return filteredTascs.sort(on: selectedSortOption)
         
     }
     
@@ -101,6 +105,7 @@ struct TasklistView: View {
                                 //Haptic Feedback on Tap
                                 let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
                                 impactHeavy.impactOccurred()
+                                NotificationHandler.shared.removeNotifications(ids: [tasc.notificationID ?? ""])
                                 context.delete(tasc)
                                 
                                 
@@ -113,22 +118,27 @@ struct TasklistView: View {
                             Button {
                                 self.detailTasc = tasc
                                 self.showDetailTaskSheet = true
-                            
+                                
                                 
                             } label: {
                                 Label("Detailansicht", systemImage: "eye")
                                     .foregroundColor(.red)
                             }
                             
-                        
+                            NavigationLink(destination: EditTaskView(inputEditTasc: tasc)) {
+                                Text("bearbeiten")
+                                Image(systemName: "pencil")
+                            }
+                            
+                            
                         }
                 }
                 if filteredTascs.count == 0 {
-                        Text("Keine Tasks in dieser Kategorie")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            
+                    Text("Keine Tasks in dieser Kategorie")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
                 }
                 
                 
@@ -141,13 +151,33 @@ struct TasklistView: View {
             .sheet(isPresented: $showDetailTaskSheet, content: {
                 DetailTaskView(tasc: $detailTasc)
             })
-
+            
             
             
             .navigationTitle(selectedCategory.name)
             
             
             .toolbar {
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    Menu {
+                        Picker("", selection: $selectedSortOption) {
+                            ForEach(SortOption.allCases,
+                                    id: \.rawValue) { option in
+                                Label(option.rawValue.capitalized,
+                                      systemImage: option.systemImage)
+                                .tag(option)
+                            }
+                        }
+                        .labelsHidden()
+                        
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .symbolVariant(.circle)
+                    }
+                    
+                }
                 
                 if taskListType == "category" {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -167,7 +197,22 @@ struct TasklistView: View {
                         }
                         
                     }
+                    
                 }
+                
+                
+                
+                if filteredTascs.count > 0 {
+                    ToolbarItem(placement: .principal) {
+                        Text("\(filteredTascs.count) Tasks")
+                            .padding(.leading)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                }
+                
+                
+                
                 
                 
                 
@@ -178,11 +223,41 @@ struct TasklistView: View {
             
             
         }
+        
+        
+        
+        
     }
 }
 
+private extension [Tasc] {
+    
+    func sort(on option: SortOption) -> [Tasc] {
+        switch option {
+        case .title:
+            self.sorted(by: { $0.title < $1.title })
+        case .date:
+            self.sorted(by: { $0.dateCreated > $1.dateCreated })
+        }
+    }
+}
 
+enum SortOption: String, CaseIterable {
+    case title
+    case date
+}
 
+extension SortOption {
+    
+    var systemImage: String {
+        switch self {
+        case .title:
+            "textformat.size.larger"
+        case .date:
+            "calendar"
+        }
+    }
+}
 
 #Preview {
     ModelPreview { category in

@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct addTaskView: View {
+struct EditTaskView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
@@ -19,13 +19,10 @@ struct addTaskView: View {
     
     @AppStorage("accentColor") private var accentColor = "B35AEF"
     
-    //InputCategory
-    @State var originalCategory: Category
-    @State var newTasc = Tasc(title: "", notificationID: "", reminderUnit: "Hours", reminderValue: 1)
     
+    @Bindable var editTasc: Tasc
     
-    //var EditTask: Tasc
-    
+    @State var selectedCategory: Category = Category(name: "", dscription: "", iconColor: "", icon: "")
     
     //Due Date
     @State var dueDate: Date = Date()
@@ -43,42 +40,15 @@ struct addTaskView: View {
     @State var useSubtasks: Bool = false
     @State var subtasks: [Subtasc] = []
     
-
-    
-    func addTasc() {
-       
-        newTasc.category = self.originalCategory
-        newTasc.subtasks = self.subtasks
+    init(inputEditTasc: Tasc) {
+        self.editTasc = inputEditTasc
         
-        
-        
-        
-        if self.letPickDate && !self.letPickDateAndTime {
-            //Date without Time gets insertet
-            self.dueDate = self.dueDate.removeTimeStamp()
-            newTasc.dueDate = self.dueDate
-        }
-        
-        if self.letPickDate && self.letPickDateAndTime {
-            //Date with Time gets insertet
-            newTasc.dueDate = self.dueDate
-        }
-        
-        if self.useReminder {
-            let notificationDate = getSubtractedDate(unit: newTasc.reminderUnit!, value: newTasc.reminderValue!, inputDate: self.dueDate)
-            //set Notification
-            newTasc.notificationID = UUID().uuidString
-            newTasc.reminderUnit = selectedUnit
-            newTasc.reminderValue = reminderValue
-            NotificationHandler.shared.scheduleNotificationWithDate(id: newTasc.notificationID!, title: "Task fällig in: \(newTasc.reminderValue!) \(newTasc.reminderUnit!)", subtitle: newTasc.title, date: notificationDate)
-        }
-        
-        context.insert(newTasc)
-        dismiss()
     }
     
+
+    
     func formIsValid() -> Bool {
-        guard !newTasc.title.trimmingCharacters(in: .whitespaces).isEmpty else {
+        guard !editTasc.title.trimmingCharacters(in: .whitespaces).isEmpty else {
             return false
         }
         
@@ -97,7 +67,7 @@ struct addTaskView: View {
     }
     
     func reminderDateisPastDate() -> Bool {
-        let notificationDate = getSubtractedDate(unit: newTasc.reminderUnit!, value: newTasc.reminderValue!, inputDate: self.dueDate)
+        let notificationDate = getSubtractedDate(unit: editTasc.reminderUnit!, value: editTasc.reminderValue!, inputDate: self.dueDate)
         return notificationDate < Date()
     }
     
@@ -110,10 +80,10 @@ struct addTaskView: View {
                 Form {
                     
                     //Title
-                    TextField("Titel", text: $newTasc.title)
+                    TextField("Titel", text: $editTasc.title)
                         .submitLabel(.next)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                    if newTasc.title.trimmingCharacters(in: .whitespaces).isEmpty {
+                    if editTasc.title.trimmingCharacters(in: .whitespaces).isEmpty {
                         HStack {
                             Image(systemName: "xmark")
                                 .foregroundColor(.red)
@@ -128,7 +98,7 @@ struct addTaskView: View {
                     }
                     
                     Section {
-                        TextField("Notizen", text: $newTasc.dscription,  axis: .vertical)
+                        TextField("Notizen", text: $editTasc.dscription,  axis: .vertical)
                             .lineLimit(5...10)
                     }
                     
@@ -204,7 +174,7 @@ struct addTaskView: View {
                     
                     Section {
                         //Categeory Selection
-                        Picker("Kategorie", selection: $originalCategory) {
+                        Picker("Kategorie", selection: $selectedCategory) {
                             
                             ForEach(allCategories, id: \.self){
                                 
@@ -313,6 +283,16 @@ struct addTaskView: View {
                                     .labelsHidden()
                                     .frame(maxWidth: .infinity, alignment: .trailing)
                                 
+                                    .onChange(of: useReminder) { oldValue, newValue in
+                                        //If use Reminder is deactivated, the existing reminder will be removed
+                                        if newValue == false {
+                                            NotificationHandler.shared.removeNotifications(ids: [editTasc.notificationID ?? ""])
+                                            editTasc.notificationID = ""
+                                            
+                                            
+                                        }
+                                    }
+                                
                             }
                             
                             if useReminder && reminderDateisPastDate() {
@@ -378,13 +358,13 @@ struct addTaskView: View {
                     
                     Section {
                         //High Priority Toggle
-                        Toggle("Hohe Priorität", isOn: $newTasc.isHighPriority)
+                        Toggle("Hohe Priorität", isOn: $editTasc.isHighPriority)
                        
                     }
                     
                     Section {
                         //Flagged Toggle
-                        Toggle("Markiert", isOn: $newTasc.isFlagged)
+                        Toggle("Markiert", isOn: $editTasc.isFlagged)
                     }
                     
                     
@@ -396,40 +376,81 @@ struct addTaskView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
+                        let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+                        impactHeavy.impactOccurred()
+                        
+                        editTasc.subtasks = self.subtasks
+                        
+                        if !self.letPickDate {
+                            editTasc.dueDate = nil
+                        }
+                        
+                        if self.letPickDate && !self.letPickDateAndTime {
+                            //Date without Time gets insertet
+                            self.dueDate = self.dueDate.removeTimeStamp()
+                            editTasc.dueDate = self.dueDate
+                        }
+                        
+                        if self.letPickDate && self.letPickDateAndTime {
+                            //Date with Time gets insertet
+                            editTasc.dueDate = self.dueDate
+                        }
+                        
+                        editTasc.category = self.selectedCategory
+                        
+                        //Reset Reminder
+                        NotificationHandler.shared.removeNotifications(ids: [editTasc.notificationID ?? ""])
+                        editTasc.notificationID = ""
+                        if self.useReminder {
+                            let notificationDate = getSubtractedDate(unit: editTasc.reminderUnit!, value: editTasc.reminderValue!, inputDate: editTasc.dueDate!)
+                            //set Notification
+                            editTasc.notificationID = UUID().uuidString
+                            editTasc.reminderUnit = selectedUnit
+                            editTasc.reminderValue = reminderValue
+                            NotificationHandler.shared.scheduleNotificationWithDate(id: editTasc.notificationID!, title: "Task fällig in: \(editTasc.reminderValue!) \(editTasc.reminderUnit!)", subtitle: editTasc.title, date: notificationDate)
+                        }
+                        
                         dismiss()
                         
                     } label: {
-                        Text("abbrechen")
+                        Text("schliessen")
                             .foregroundColor(Color(hex: accentColor))
                     }
+                    .disabled(!self.formIsValid())
                     
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text("Neuer Task")
+                    Text("Task bearbeiten")
                         .fontWeight(.semibold)
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        //Haptic Feedback on Tap
-                        let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
-                        impactHeavy.impactOccurred()
-                        addTasc()
-                        dismiss()
-                        
-                    } label: {
-                        Text("hinzufügen")
-                            .foregroundColor(Color(hex: accentColor))
-                    }
-                    .disabled(!formIsValid())
-                    
-                }
+
                 
                 
                 
             }
+            .onAppear() {
+                self.selectedCategory = editTasc.category!
+                if self.editTasc.dueDate != nil {
+                    print("edit tasc has due date")
+                    self.dueDate = editTasc.dueDate!
+                    self.letPickDate = true
+                    self.letPickDateAndTime = true
+                }
+                
+                if editTasc.notificationID != "" {
+                    self.useReminder = true
+                    self.selectedUnit = editTasc.reminderUnit!
+                    self.reminderValue = editTasc.reminderValue!
+                }
+                
+                if editTasc.subtasks!.count > 0 {
+                    self.useSubtasks = true
+                    self.subtasks = editTasc.subtasks!
+                }
+            }
         }
+        .navigationBarBackButtonHidden(true)
         
         
        
@@ -453,7 +474,7 @@ struct addTaskView: View {
 
 
 #Preview {
-    ModelPreview { category in
-        addTaskView(originalCategory: category)
+    ModelPreview { tasc in
+        EditTaskView(inputEditTasc: tasc)
     }
 }

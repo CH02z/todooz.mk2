@@ -65,6 +65,7 @@ class Tasc {
     
     static func exampl1() -> Tasc {
         let tasc = Tasc(title: "RPA-573 analysieren", dueDate: Date())
+        tasc.category = Category(name: "Swisscom", dscription: "", iconColor: "", icon: "")
         return tasc
     }
     

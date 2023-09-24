@@ -17,6 +17,8 @@
 		833BC8FA2AC0760F00230204 /* DoneTaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8F92AC0760F00230204 /* DoneTaskRow.swift */; };
 		833BC8FC2AC07C3F00230204 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8FB2AC07C3F00230204 /* SettingsView.swift */; };
 		833BC8FE2AC07D1F00230204 /* AppIconService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8FD2AC07D1F00230204 /* AppIconService.swift */; };
+		833BC9002AC097E900230204 /* editTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8FF2AC097E900230204 /* editTaskView.swift */; };
+		833BC9042AC0C78E00230204 /* SearchResultTaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC9032AC0C78E00230204 /* SearchResultTaskRow.swift */; };
 		837692E92ABDC88600EFCC78 /* todooz_mk2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692E82ABDC88600EFCC78 /* todooz_mk2App.swift */; };
 		837692EB2ABDC88600EFCC78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692EA2ABDC88600EFCC78 /* ContentView.swift */; };
 		837692ED2ABDC88800EFCC78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 837692EC2ABDC88800EFCC78 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 		833BC8F92AC0760F00230204 /* DoneTaskRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneTaskRow.swift; sourceTree = "<group>"; };
 		833BC8FB2AC07C3F00230204 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		833BC8FD2AC07D1F00230204 /* AppIconService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconService.swift; sourceTree = "<group>"; };
+		833BC8FF2AC097E900230204 /* editTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editTaskView.swift; sourceTree = "<group>"; };
+		833BC9032AC0C78E00230204 /* SearchResultTaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTaskRow.swift; sourceTree = "<group>"; };
 		837692E52ABDC88600EFCC78 /* todooz.mk2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todooz.mk2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837692E82ABDC88600EFCC78 /* todooz_mk2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todooz_mk2App.swift; sourceTree = "<group>"; };
 		837692EA2ABDC88600EFCC78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -148,10 +152,12 @@
 				833BC8EF2ABF139500230204 /* TasklistView.swift */,
 				833BC8F72AC0741300230204 /* IsDoneTasklistView.swift */,
 				833BC8F12ABF15B200230204 /* addTaskView.swift */,
+				833BC8FF2AC097E900230204 /* editTaskView.swift */,
 				833BC8F32AC05A5700230204 /* TaskRowView.swift */,
 				833BC8F92AC0760F00230204 /* DoneTaskRow.swift */,
 				833BC8F52AC0608300230204 /* DetailTaskView.swift */,
 				833BC8FB2AC07C3F00230204 /* SettingsView.swift */,
+				833BC9032AC0C78E00230204 /* SearchResultTaskRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,8 +251,10 @@
 				833BC8F02ABF139500230204 /* TasklistView.swift in Sources */,
 				837692E92ABDC88600EFCC78 /* todooz_mk2App.swift in Sources */,
 				837693272ABEFA3500EFCC78 /* AddCategoryView.swift in Sources */,
+				833BC9002AC097E900230204 /* editTaskView.swift in Sources */,
 				837693162ABDC99900EFCC78 /* Category.swift in Sources */,
 				833BC8EE2ABF08EB00230204 /* PrewieSampleData.swift in Sources */,
+				833BC9042AC0C78E00230204 /* SearchResultTaskRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

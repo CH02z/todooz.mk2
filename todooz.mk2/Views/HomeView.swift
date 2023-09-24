@@ -6,31 +6,67 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeView: View {
     
     
     @AppStorage("accentColor") private var accentColor = "B35AEF"
     
+    @Query(filter: #Predicate<Tasc> { $0.isDone == false }) private var allTascs: [Tasc]
+    
     @State private var showAddCategorySheet: Bool = false
     
+    @State private var searchQuery = ""
+    
+    var filteredItems: [Tasc] {
+            if searchQuery.isEmpty { return allTascs }
+            
+            let filteredTascs = allTascs.compactMap { tasc in
+                let titleContainsQuery = tasc.title.range(of: searchQuery, options: .caseInsensitive) != nil
+                let categoryTitleContainsQuery = tasc.category?.name.range(of: searchQuery, options: .caseInsensitive) != nil
+                return (titleContainsQuery || categoryTitleContainsQuery) ? tasc : nil
+            }
+            
+            return filteredTascs
+            
+        }
     
     var body: some View {
         NavigationStack {
             
-            VStack {
-                StandardCategoryPreviewView()
-                    .padding()
-                Spacer()
+            VStack(alignment: .leading) {
                 
-                CategoryListView()
-                
-                
-                
-                
-                
-                
-                
+                if self.searchQuery == "" {
+                    StandardCategoryPreviewView()
+                        .padding()
+                    Spacer()
+                    Text("Meine Kategorien")
+                        .padding(.leading)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .padding(.top)
+                    
+                    CategoryListView()
+                    
+                } else {
+                    if filteredItems.count > 0 {
+                        Text("\(filteredItems.count) Resultate")
+                            .foregroundColor(.secondary)
+                            .padding(.top)
+                            .padding(.leading, 25)
+                        List {
+                            ForEach(filteredItems) {tasc in
+                                NavigationLink(destination: TasklistView(selectedCategory: tasc.category!, taskListType: "category")) {
+                                    searchResultTaskRow(tasc: tasc)
+                                }
+                            }
+                        }
+                    } else {
+                        Text("Keine Suchergebnisse")
+                            .foregroundColor(.secondary)
+                    }
+                }
                 
             }
             .sheet(isPresented: $showAddCategorySheet) {
@@ -40,6 +76,7 @@ struct HomeView: View {
             
             
             .navigationTitle("Tasks")
+            .searchable(text: $searchQuery, prompt: "Tasks durchsuchen")
             .toolbar {
                 
                 ToolbarItem(placement: .navigationBarLeading) {
