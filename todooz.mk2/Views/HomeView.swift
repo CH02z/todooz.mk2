@@ -16,40 +16,31 @@ struct HomeView: View {
     @Query(filter: #Predicate<Tasc> { $0.isDone == false }) private var allTascs: [Tasc]
     
     @State private var showAddCategorySheet: Bool = false
+    @State private var showSearchResultSheet: Bool = false
     
     @State private var searchQuery = ""
     
     var filteredItems: [Tasc] {
-            if searchQuery.isEmpty { return allTascs }
-            
-            let filteredTascs = allTascs.compactMap { tasc in
-                let titleContainsQuery = tasc.title.range(of: searchQuery, options: .caseInsensitive) != nil
-                let categoryTitleContainsQuery = tasc.category?.name.range(of: searchQuery, options: .caseInsensitive) != nil
-                return (titleContainsQuery || categoryTitleContainsQuery) ? tasc : nil
-            }
-            
-            return filteredTascs
-            
+        if searchQuery.isEmpty { return allTascs }
+        
+        let filteredTascs = allTascs.compactMap { tasc in
+            let titleContainsQuery = tasc.title.range(of: searchQuery, options: .caseInsensitive) != nil
+            let categoryTitleContainsQuery = tasc.category?.name.range(of: searchQuery, options: .caseInsensitive) != nil
+            return (titleContainsQuery || categoryTitleContainsQuery) ? tasc : nil
         }
+        
+        return filteredTascs
+        
+    }
     
     var body: some View {
         NavigationStack {
             
             VStack(alignment: .leading) {
                 
-                if self.searchQuery == "" {
-                    StandardCategoryPreviewView()
-                        .padding()
-                    Spacer()
-                    Text("Meine Kategorien")
-                        .padding(.leading)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .padding(.top)
+                
+                if searchQuery != "" {
                     
-                    CategoryListView()
-                    
-                } else {
                     if filteredItems.count > 0 {
                         Text("\(filteredItems.count) Resultate")
                             .foregroundColor(.secondary)
@@ -61,14 +52,38 @@ struct HomeView: View {
                                     searchResultTaskRow(tasc: tasc)
                                 }
                             }
+                            .presentationDetents([.height(200), .medium, .large])
+                            .presentationDragIndicator(.automatic)
                         }
                     } else {
                         Text("Keine Suchergebnisse")
                             .foregroundColor(.secondary)
                     }
+                    
+                } else {
+                    
+                    Spacer()
+                    StandardCategoryPreviewView()
+                      .padding()
+                    Text("Meine Kategorien")
+                        .padding(.leading)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .padding(.top)
+                    
+                    CategoryListView()
+                    
+                    
+                    
+                    
                 }
                 
+                
             }
+            
+            
+            
+            
             .sheet(isPresented: $showAddCategorySheet) {
                 AddCategoryView()
                     .interactiveDismissDisabled()

@@ -13,12 +13,10 @@ struct TasklistView: View {
     @Environment(\.modelContext) private var context
     
     @AppStorage("accentColor") private var accentColor = "B35AEF"
+    @AppStorage("selectedSortOption") private var selectedSortOption = SortOption.allCases.first!
+    
     @State private var showAddTaskSheet: Bool = false
-    @State var showDetailTaskSheet: Bool = false
-    
-    @State private var selectedSortOption = SortOption.allCases.first!
-    
-    @State var detailTasc: Tasc = Tasc(title: "")
+ 
     
     //InputCategory
     @Bindable var selectedCategory: Category
@@ -115,15 +113,13 @@ struct TasklistView: View {
                             .tint(.red)
                         }
                         .contextMenu {
-                            Button {
-                                self.detailTasc = tasc
-                                self.showDetailTaskSheet = true
-                                
-                                
-                            } label: {
-                                Label("Detailansicht", systemImage: "eye")
-                                    .foregroundColor(.red)
+                                                       
+                            NavigationLink(destination: DetailTaskView(tasc: tasc, subtascs: tasc.subtasks!)) {
+                                Text("Detailansicht")
+                                Image(systemName: "eye")
                             }
+                            
+                            
                             
                             NavigationLink(destination: EditTaskView(inputEditTasc: tasc)) {
                                 Text("bearbeiten")
@@ -148,9 +144,6 @@ struct TasklistView: View {
                 addTaskView(originalCategory: selectedCategory)
                     .interactiveDismissDisabled()
             }
-            .sheet(isPresented: $showDetailTaskSheet, content: {
-                DetailTaskView(tasc: $detailTasc)
-            })
             
             
             
@@ -237,7 +230,7 @@ private extension [Tasc] {
         case .title:
             self.sorted(by: { $0.title < $1.title })
         case .date:
-            self.sorted(by: { $0.dateCreated > $1.dateCreated })
+            self.sorted(by: { $0.dateCreated < $1.dateCreated })
         }
     }
 }

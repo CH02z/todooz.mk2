@@ -452,24 +452,8 @@ struct EditTaskView: View {
         }
         .navigationBarBackButtonHidden(true)
         
-        
-       
-        
-        
-        
-        
-        
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
 }
 
 

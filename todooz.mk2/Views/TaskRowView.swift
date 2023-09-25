@@ -75,9 +75,11 @@ struct TaskRowView: View {
                 .font(.system(size: 30))
                 .onTapGesture {
                     Task { @MainActor in
-                        withAnimation {
-                            isStrikeThrough.toggle()
-                        }
+                        let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+                        impactHeavy.impactOccurred()
+                        
+                        isStrikeThrough.toggle()
+                        
                         try await Task.sleep(seconds: 1.0)
                         //Haptic Feedback on remove
                         let impactLight = UIImpactFeedbackGenerator(style: .light)

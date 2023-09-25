@@ -430,25 +430,11 @@ struct addTaskView: View {
                 
             }
         }
-        
-        
-       
-        
-        
-        
-        
-        
+          
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
+ 
 }
 
 
