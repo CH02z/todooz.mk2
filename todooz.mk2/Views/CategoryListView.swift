@@ -58,6 +58,7 @@ struct CategoryListView: View {
             }
             
         }
+        .frame(minHeight: 400)
         .alert("If you delete a category, all the associated Tasks will be deleted too.", isPresented: $deleteRequest) {
             Button(role: .destructive) {
                 /// Deleting Category

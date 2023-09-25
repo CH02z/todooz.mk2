@@ -32,6 +32,7 @@
 		837693232ABEEF7800EFCC78 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837693222ABEEF7800EFCC78 /* HomeView.swift */; };
 		837693252ABEF3E800EFCC78 /* StandardCategoryPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837693242ABEF3E800EFCC78 /* StandardCategoryPreviewView.swift */; };
 		837693272ABEFA3500EFCC78 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837693262ABEFA3400EFCC78 /* AddCategoryView.swift */; };
+		83D626C02AC221C900A97B5F /* FlaggedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D626BF2AC221C900A97B5F /* FlaggedTaskList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		837693222ABEEF7800EFCC78 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		837693242ABEF3E800EFCC78 /* StandardCategoryPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardCategoryPreviewView.swift; sourceTree = "<group>"; };
 		837693262ABEFA3400EFCC78 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		83D626BF2AC221C900A97B5F /* FlaggedTaskList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlaggedTaskList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				837693262ABEFA3400EFCC78 /* AddCategoryView.swift */,
 				833BC8EB2ABF052B00230204 /* CategoryListView.swift */,
 				833BC8EF2ABF139500230204 /* TasklistView.swift */,
+				83D626BF2AC221C900A97B5F /* FlaggedTaskList.swift */,
 				833BC8F72AC0741300230204 /* IsDoneTasklistView.swift */,
 				833BC8F12ABF15B200230204 /* addTaskView.swift */,
 				833BC8FF2AC097E900230204 /* editTaskView.swift */,
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837693232ABEEF7800EFCC78 /* HomeView.swift in Sources */,
+				83D626C02AC221C900A97B5F /* FlaggedTaskList.swift in Sources */,
 				833BC8F62AC0608300230204 /* DetailTaskView.swift in Sources */,
 				833BC8F22ABF15B200230204 /* addTaskView.swift in Sources */,
 				833BC8F82AC0741300230204 /* IsDoneTasklistView.swift in Sources */,

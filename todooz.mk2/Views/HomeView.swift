@@ -36,49 +36,57 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             
-            VStack(alignment: .leading) {
-                
-                
-                if searchQuery != "" {
+            
+            ScrollView(.vertical) {
+                VStack(alignment: .leading) {
                     
-                    if filteredItems.count > 0 {
-                        Text("\(filteredItems.count) Resultate")
-                            .foregroundColor(.secondary)
-                            .padding(.top)
-                            .padding(.leading, 25)
-                        List {
-                            ForEach(filteredItems) {tasc in
-                                NavigationLink(destination: TasklistView(selectedCategory: tasc.category!, taskListType: "category")) {
-                                    searchResultTaskRow(tasc: tasc)
+                    
+                    if searchQuery != "" {
+                        
+                        if filteredItems.count > 0 {
+                            Text("\(filteredItems.count) Resultate")
+                                .foregroundColor(.secondary)
+                                .padding(.top)
+                                .padding(.leading, 25)
+                            List {
+                                ForEach(filteredItems) {tasc in
+                                    NavigationLink(destination: TasklistView(selectedCategory: tasc.category!, taskListType: "category")) {
+                                        searchResultTaskRow(tasc: tasc)
+                                    }
                                 }
+                                .presentationDetents([.height(200), .medium, .large])
+                                .presentationDragIndicator(.automatic)
                             }
-                            .presentationDetents([.height(200), .medium, .large])
-                            .presentationDragIndicator(.automatic)
+                            .frame(minHeight: 700)
+                        } else {
+                            Text("Keine Suchergebnisse")
+                                .foregroundColor(.secondary)
+                                .padding(.top)
                         }
+                        
                     } else {
-                        Text("Keine Suchergebnisse")
-                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                        StandardCategoryPreviewView()
+                            .padding()
+                        FlaggedTasklistView()
+                            .padding()
+                        Text("Meine Kategorien")
+                            .padding(.leading)
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .padding(.top)
+                        
+                        CategoryListView()
+                        
+                        
+                        
+                        
                     }
                     
-                } else {
-                    
-                    Spacer()
-                    StandardCategoryPreviewView()
-                      .padding()
-                    Text("Meine Kategorien")
-                        .padding(.leading)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .padding(.top)
-                    
-                    CategoryListView()
-                    
-                    
-                    
-                    
+
                 }
-                
-                
+            
             }
             
             
