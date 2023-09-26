@@ -37,7 +37,7 @@ struct HomeView: View {
         NavigationStack {
             
             
-            ScrollView(.vertical) {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading) {
                     
                     
