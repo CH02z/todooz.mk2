@@ -65,12 +65,25 @@ struct addTaskView: View {
         }
         
         if self.useReminder {
-            let notificationDate = getSubtractedDate(unit: newTasc.reminderUnit!, value: newTasc.reminderValue!, inputDate: self.dueDate)
+            let notificationDate = getSubtractedDate(unit: selectedUnit, value: reminderValue, inputDate: self.dueDate)
             //set Notification
             newTasc.notificationID = UUID().uuidString
             newTasc.reminderUnit = selectedUnit
             newTasc.reminderValue = reminderValue
-            NotificationHandler.shared.scheduleNotificationWithDate(id: newTasc.notificationID!, title: "Task fällig in: \(newTasc.reminderValue!) \(newTasc.reminderUnit!)", subtitle: newTasc.title, date: notificationDate)
+            
+            var reminderUnitString = "Stunde(n)"
+            
+            switch selectedUnit {
+            case "Hours":
+                reminderUnitString = "Stunde(n)"
+            case "Days":
+                reminderUnitString = "Tag(e)"
+            case "Minutes":
+                reminderUnitString = "Minute(n)"
+            default:
+                reminderUnitString = "Stunde(n)"
+            }
+            NotificationHandler.shared.scheduleNotificationWithDate(id: newTasc.notificationID!, title: "Task fällig in: \(reminderValue) \(reminderUnitString)", subtitle: newTasc.title, date: notificationDate)
         }
         
         context.insert(newTasc)
@@ -97,7 +110,7 @@ struct addTaskView: View {
     }
     
     func reminderDateisPastDate() -> Bool {
-        let notificationDate = getSubtractedDate(unit: newTasc.reminderUnit!, value: newTasc.reminderValue!, inputDate: self.dueDate)
+        let notificationDate = getSubtractedDate(unit: selectedUnit, value: reminderValue, inputDate: self.dueDate)
         return notificationDate < Date()
     }
     

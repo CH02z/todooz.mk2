@@ -46,9 +46,6 @@ struct TasklistView: View {
                 }
             case "priority":
                 return (tasc.isHighPriority) ? tasc : nil
-                
-            case "flagged":
-                return (tasc.isFlagged) ? tasc : nil
             case "overdue":
                 if tasc.dueDate != nil {
                     return (tasc.dueDate!.isPast) ? tasc : nil

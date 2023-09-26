@@ -127,16 +127,6 @@ struct StandardCategoryPreviewView: View {
                         }
                         .padding(.leading, 15)
                         
-                    
-                        NavigationLink(destination: TasklistView(selectedCategory: Category(name: "Markiert", dscription: "", iconColor: "", icon: ""), taskListType: "flagged")) {
-                            Image(systemName: "flag")
-                                .foregroundColor(Color(hex: accentColor))
-                                .frame(width: 40, height: 40)
-                                .background(Color(.systemGray4))
-                                .cornerRadius(30)
-                                .font(.system(size: 20))
-                                
-                        }
                         
                         NavigationLink(destination: TasklistView(selectedCategory: Category(name: "Erinnerungen", dscription: "", iconColor: "", icon: ""), taskListType: "scheduled")) {
                             Image(systemName: "bell")
