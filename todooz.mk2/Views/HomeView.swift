@@ -20,6 +20,8 @@ struct HomeView: View {
     
     @State private var searchQuery = ""
     
+    @State private var navigationTitle = "Tasks"
+    
     var filteredItems: [Tasc] {
         if searchQuery.isEmpty { return allTascs }
         
@@ -31,6 +33,14 @@ struct HomeView: View {
         
         return filteredTascs
         
+    }
+    
+    struct ViewOffsetKey: PreferenceKey {
+        typealias Value = CGFloat
+        static var defaultValue = CGFloat.zero
+        static func reduce(value: inout Value, nextValue: () -> Value) {
+            value += nextValue()
+        }
     }
     
     var body: some View {
@@ -84,9 +94,25 @@ struct HomeView: View {
                         
                     }
                     
-
+                    
                 }
-            
+                .background(
+                    GeometryReader {proxy in
+                        let offset = proxy.frame(in: .named("scroll")).minY
+                        Color.clear.preference(
+                            key: ViewOffsetKey.self,
+                            value: offset
+                        )
+                        
+                        
+                    })
+                .onPreferenceChange(ViewOffsetKey.self) { value in
+                    
+                    DispatchQueue.main.async {
+                        self.navigationTitle = value < 125 ? "" : "Tasks"
+                        }
+                }
+                
             }
             
             
@@ -98,7 +124,7 @@ struct HomeView: View {
             }
             
             
-            .navigationTitle("Tasks")
+            .navigationTitle(navigationTitle)
             .searchable(text: $searchQuery, prompt: "Tasks durchsuchen")
             .toolbar {
                 
