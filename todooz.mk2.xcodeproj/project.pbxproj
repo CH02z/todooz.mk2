@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830F63AF2AC4A25000817B99 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830F63AE2AC4A25000817B99 /* WidgetKit.framework */; };
+		830F63B12AC4A25000817B99 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830F63B02AC4A25000817B99 /* SwiftUI.framework */; };
+		830F63B42AC4A25000817B99 /* TodoozWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F63B32AC4A25000817B99 /* TodoozWidgetBundle.swift */; };
+		830F63B62AC4A25100817B99 /* TodoozWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F63B52AC4A25100817B99 /* TodoozWidget.swift */; };
+		830F63B82AC4A25200817B99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830F63B72AC4A25200817B99 /* Assets.xcassets */; };
+		830F63BC2AC4A25200817B99 /* TodoozWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 830F63AC2AC4A25000817B99 /* TodoozWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		830F63C12AC4A44F00817B99 /* Tasc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837692F72ABDC8B600EFCC78 /* Tasc.swift */; };
+		830F63C22AC4A45200817B99 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837693152ABDC99900EFCC78 /* Category.swift */; };
+		830F63C32AC4A45500817B99 /* Subtasc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837693172ABDC9C600EFCC78 /* Subtasc.swift */; };
 		833BC8EC2ABF052B00230204 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8EB2ABF052B00230204 /* CategoryListView.swift */; };
 		833BC8EE2ABF08EB00230204 /* PrewieSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8ED2ABF08EB00230204 /* PrewieSampleData.swift */; };
 		833BC8F02ABF139500230204 /* TasklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BC8EF2ABF139500230204 /* TasklistView.swift */; };
@@ -35,7 +44,40 @@
 		83D626C02AC221C900A97B5F /* FlaggedTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D626BF2AC221C900A97B5F /* FlaggedTaskList.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		830F63BA2AC4A25200817B99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 837692DD2ABDC88600EFCC78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 830F63AB2AC4A25000817B99;
+			remoteInfo = TodoozWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		830F63BD2AC4A25200817B99 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				830F63BC2AC4A25200817B99 /* TodoozWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		830F63AC2AC4A25000817B99 /* TodoozWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodoozWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		830F63AE2AC4A25000817B99 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		830F63B02AC4A25000817B99 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		830F63B32AC4A25000817B99 /* TodoozWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoozWidgetBundle.swift; sourceTree = "<group>"; };
+		830F63B52AC4A25100817B99 /* TodoozWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoozWidget.swift; sourceTree = "<group>"; };
+		830F63B72AC4A25200817B99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		830F63B92AC4A25200817B99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		830F63C62AC4B18A00817B99 /* TodoozWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoozWidgetExtension.entitlements; sourceTree = "<group>"; };
+		830F63C72AC4B1CD00817B99 /* todooz.mk2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = todooz.mk2.entitlements; sourceTree = "<group>"; };
 		833BC8EB2ABF052B00230204 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 		833BC8ED2ABF08EB00230204 /* PrewieSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrewieSampleData.swift; sourceTree = "<group>"; };
 		833BC8EF2ABF139500230204 /* TasklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasklistView.swift; sourceTree = "<group>"; };
@@ -66,6 +108,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		830F63A92AC4A25000817B99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				830F63B12AC4A25000817B99 /* SwiftUI.framework in Frameworks */,
+				830F63AF2AC4A25000817B99 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		837692E22ABDC88600EFCC78 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -76,10 +127,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		830F63AD2AC4A25000817B99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				830F63AE2AC4A25000817B99 /* WidgetKit.framework */,
+				830F63B02AC4A25000817B99 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		830F63B22AC4A25000817B99 /* TodoozWidget */ = {
+			isa = PBXGroup;
+			children = (
+				830F63B32AC4A25000817B99 /* TodoozWidgetBundle.swift */,
+				830F63B52AC4A25100817B99 /* TodoozWidget.swift */,
+				830F63B72AC4A25200817B99 /* Assets.xcassets */,
+				830F63B92AC4A25200817B99 /* Info.plist */,
+			);
+			path = TodoozWidget;
+			sourceTree = "<group>";
+		};
 		837692DC2ABDC88600EFCC78 = {
 			isa = PBXGroup;
 			children = (
+				830F63C62AC4B18A00817B99 /* TodoozWidgetExtension.entitlements */,
 				837692E72ABDC88600EFCC78 /* todooz.mk2 */,
+				830F63B22AC4A25000817B99 /* TodoozWidget */,
+				830F63AD2AC4A25000817B99 /* Frameworks */,
 				837692E62ABDC88600EFCC78 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				837692E52ABDC88600EFCC78 /* todooz.mk2.app */,
+				830F63AC2AC4A25000817B99 /* TodoozWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +170,7 @@
 		837692E72ABDC88600EFCC78 /* todooz.mk2 */ = {
 			isa = PBXGroup;
 			children = (
+				830F63C72AC4B1CD00817B99 /* todooz.mk2.entitlements */,
 				837693192ABEE90600EFCC78 /* Other */,
 				8376931C2ABEEAED00EFCC78 /* Services */,
 				837692F62ABDC8A300EFCC78 /* Models */,
@@ -168,6 +244,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		830F63AB2AC4A25000817B99 /* TodoozWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 830F63C02AC4A25200817B99 /* Build configuration list for PBXNativeTarget "TodoozWidgetExtension" */;
+			buildPhases = (
+				830F63A82AC4A25000817B99 /* Sources */,
+				830F63A92AC4A25000817B99 /* Frameworks */,
+				830F63AA2AC4A25000817B99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodoozWidgetExtension;
+			productName = TodoozWidgetExtension;
+			productReference = 830F63AC2AC4A25000817B99 /* TodoozWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		837692E42ABDC88600EFCC78 /* todooz.mk2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 837692F32ABDC88800EFCC78 /* Build configuration list for PBXNativeTarget "todooz.mk2" */;
@@ -175,10 +268,12 @@
 				837692E12ABDC88600EFCC78 /* Sources */,
 				837692E22ABDC88600EFCC78 /* Frameworks */,
 				837692E32ABDC88600EFCC78 /* Resources */,
+				830F63BD2AC4A25200817B99 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				830F63BB2AC4A25200817B99 /* PBXTargetDependency */,
 			);
 			name = todooz.mk2;
 			productName = todooz.mk2;
@@ -195,6 +290,9 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					830F63AB2AC4A25000817B99 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					837692E42ABDC88600EFCC78 = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -214,11 +312,20 @@
 			projectRoot = "";
 			targets = (
 				837692E42ABDC88600EFCC78 /* todooz.mk2 */,
+				830F63AB2AC4A25000817B99 /* TodoozWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		830F63AA2AC4A25000817B99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				830F63B82AC4A25200817B99 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		837692E32ABDC88600EFCC78 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -231,6 +338,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		830F63A82AC4A25000817B99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				830F63C32AC4A45500817B99 /* Subtasc.swift in Sources */,
+				830F63B62AC4A25100817B99 /* TodoozWidget.swift in Sources */,
+				830F63C12AC4A44F00817B99 /* Tasc.swift in Sources */,
+				830F63B42AC4A25000817B99 /* TodoozWidgetBundle.swift in Sources */,
+				830F63C22AC4A45200817B99 /* Category.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		837692E12ABDC88600EFCC78 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,7 +383,71 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		830F63BB2AC4A25200817B99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 830F63AB2AC4A25000817B99 /* TodoozWidgetExtension */;
+			targetProxy = 830F63BA2AC4A25200817B99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		830F63BE2AC4A25200817B99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TodoozWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AKXZB6A59L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TodoozWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TodoozWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "cz.todooz-mk2.TodoozWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		830F63BF2AC4A25200817B99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TodoozWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AKXZB6A59L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TodoozWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TodoozWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "cz.todooz-mk2.TodoozWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		837692F12ABDC88800EFCC78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -387,10 +570,12 @@
 		837692F42ABDC88800EFCC78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-green AppIcon-blue AppIcon-orange AppIcon-red";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-purple";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = todooz.mk2/todooz.mk2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"todooz.mk2/Preview Content\"";
@@ -418,10 +603,12 @@
 		837692F52ABDC88800EFCC78 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIcon-green AppIcon-blue AppIcon-orange AppIcon-red";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-purple";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = todooz.mk2/todooz.mk2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"todooz.mk2/Preview Content\"";
@@ -449,6 +636,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		830F63C02AC4A25200817B99 /* Build configuration list for PBXNativeTarget "TodoozWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				830F63BE2AC4A25200817B99 /* Debug */,
+				830F63BF2AC4A25200817B99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		837692E02ABDC88600EFCC78 /* Build configuration list for PBXProject "todooz.mk2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
