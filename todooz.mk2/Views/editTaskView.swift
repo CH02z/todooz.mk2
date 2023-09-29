@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct EditTaskView: View {
     
@@ -409,6 +410,9 @@ struct EditTaskView: View {
                             editTasc.reminderValue = reminderValue
                             NotificationHandler.shared.scheduleNotificationWithDate(id: editTasc.notificationID!, title: "Task fällig in: \(editTasc.reminderValue!) \(editTasc.reminderUnit!)", subtitle: editTasc.title, date: notificationDate)
                         }
+                        
+                        //reload Widget
+                        WidgetCenter.shared.reloadAllTimelines()
                         
                         dismiss()
                         

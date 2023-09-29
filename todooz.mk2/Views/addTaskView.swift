@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct addTaskView: View {
     
@@ -87,6 +88,10 @@ struct addTaskView: View {
         }
         
         context.insert(newTasc)
+        
+        //reload Widget
+        WidgetCenter.shared.reloadAllTimelines()
+        
         dismiss()
     }
     

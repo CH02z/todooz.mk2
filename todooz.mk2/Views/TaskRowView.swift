@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct TaskRowView: View {
     
@@ -89,6 +90,7 @@ struct TaskRowView: View {
                         tasc.notificationID = ""
                         tasc.isDone.toggle()
                         isStrikeThrough.toggle()
+                        WidgetCenter.shared.reloadAllTimelines()
                     }
                     
                     

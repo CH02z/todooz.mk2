@@ -14,20 +14,17 @@ struct Provider: TimelineProvider {
     
     @MainActor
     func placeholder(in context: Context) -> TaskEntry {
-        TaskEntry(date: .now, TodayTasks: [])
+        TaskEntry(date: .now, TodayTasks: [Tasc(title: "Einkaufen", dueDate: .now), Tasc(title: "Aufräumen", dueDate: .now), Tasc(title: "Motorrad waschen", dueDate: .now)])
     }
     
     @MainActor
     func getSnapshot(in context: Context, completion: @escaping (TaskEntry) -> ()) {
-        let entry = TaskEntry(date: .now, TodayTasks: [])
+        let entry = TaskEntry(date: .now, TodayTasks: [Tasc(title: "Einkaufen", dueDate: .now), Tasc(title: "Aufräumen", dueDate: .now), Tasc(title: "Motorrad waschen", dueDate: .now)])
         completion(entry)
     }
     @MainActor
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         //Fetch SwiftData Data here:
-        
-       
-        
         let todayTascs = self.getTodayTasks()
         let entries: [TaskEntry] = [TaskEntry(date: .now, TodayTasks: todayTascs)]
         
@@ -47,11 +44,11 @@ struct Provider: TimelineProvider {
         //Filter For Tascs that are Due for Today
         var todayTascs: [Tasc] {
             let todayTascs = allTascs!.compactMap { tasc in
-                    if tasc.dueDate != nil {
-                        return (tasc.dueDate!.isToday) ? tasc : nil
-                    } else {
-                        return nil
-                    }
+                if tasc.dueDate != nil {
+                    return (tasc.dueDate!.isToday) ? tasc : nil
+                } else {
+                    return nil
+                }
             }
             return todayTascs
             
@@ -70,10 +67,10 @@ struct TaskEntry: TimelineEntry {
 struct TodoozWidgetEntryView : View {
     
     @AppStorage("accentColor") private var accentColor = "B35AEF"
-
+    
     
     var entry: Provider.Entry
-
+    
     var body: some View {
         VStack(alignment: .leading, content: {
             
@@ -114,7 +111,7 @@ struct TodoozWidgetEntryView : View {
 
 struct TodoozWidget: Widget {
     let kind: String = "TodoozWidget"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
@@ -127,8 +124,8 @@ struct TodoozWidget: Widget {
             }
         }
         .supportedFamilies([.systemSmall, .systemMedium])
-        .configurationDisplayName("Task Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Tasc Widget")
+        .description("Shows als Tasks that are due today")
     }
 }
 
@@ -144,7 +141,7 @@ struct WidgetTaskRowView: View {
     let rowIndex: Int
     
     @State var isStrikeThrough: Bool = false
-
+    
     var body: some View {
         HStack {
             
@@ -180,16 +177,22 @@ struct WidgetTaskRowView: View {
                 
             })
             
-                
-                
-
+            
+            
+            
             
             Spacer()
             
-            Button(intent: ToggleStateIntent(id: tasc.title)) {
+            Button(intent: ToggleStateIntent(id: String(tasc.id.description))) {
                 Image(systemName: tasc.isDone ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(Color(hex: accentColor))
+                    .onTapGesture {
+                        print("tab triggered")
+                        self.isStrikeThrough.toggle()
+                        print(self.isStrikeThrough)
+                    }
             }
+           
             .buttonStyle(.plain)
             
             
@@ -208,33 +211,33 @@ extension Color {
     init?(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-
+        
         var rgb: UInt64 = 0
-
+        
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
         var b: CGFloat = 0.0
         var a: CGFloat = 1.0
-
+        
         let length = hexSanitized.count
-
+        
         guard Scanner(string: hexSanitized).scanHexInt64(&rgb) else { return nil }
-
+        
         if length == 6 {
             r = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
             g = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
             b = CGFloat(rgb & 0x0000FF) / 255.0
-
+            
         } else if length == 8 {
             r = CGFloat((rgb & 0xFF000000) >> 24) / 255.0
             g = CGFloat((rgb & 0x00FF0000) >> 16) / 255.0
             b = CGFloat((rgb & 0x0000FF00) >> 8) / 255.0
             a = CGFloat(rgb & 0x000000FF) / 255.0
-
+            
         } else {
             return nil
         }
-
+        
         self.init(red: r, green: g, blue: b, opacity: a)
     }
 }
@@ -283,7 +286,8 @@ struct ToggleStateIntent: AppIntent {
         guard let modelContainer = try? ModelContainer(for: Tasc.self) else {
             return Tasc(title: "")
         }
-        let predicate = #Predicate<Tasc> { $0.title == id }
+        let uuid = UUID(uuidString: self.id)!
+        let predicate = #Predicate<Tasc> { $0.id == uuid }
         let descriptor = FetchDescriptor(predicate: predicate)
         let tascs = try? modelContainer.mainContext.fetch(descriptor)
         return tascs![0] ?? Tasc(title: "")
@@ -291,16 +295,14 @@ struct ToggleStateIntent: AppIntent {
     
     func perform() async throws -> some IntentResult {
         
-        print("task intent triggered")
+        print("task intent triggered for task with id: \(self.id)")
         // UPDATE YOUR DATABASE HERE
         
         var tasc = await getTascByID(id: self.id)
-        tasc.isDone.toggle()
-        
-        
-        
-       
+        tasc.isDone.toggle()        
         return .result()
+        
+        
     }
 }
 

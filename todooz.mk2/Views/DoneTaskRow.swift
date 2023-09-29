@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct DoneTaskRowView: View {
     
@@ -41,6 +42,8 @@ struct DoneTaskRowView: View {
                         impactLight.impactOccurred()
                         tasc.isDone.toggle()
                         isStrikeThrough.toggle()
+                        //reload WIdget
+                        WidgetCenter.shared.reloadAllTimelines()
                     }
                     
                     

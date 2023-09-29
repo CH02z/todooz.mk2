@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct TasklistView: View {
     
@@ -22,10 +23,7 @@ struct TasklistView: View {
     @Bindable var selectedCategory: Category
     let taskListType: String
     
-    @Query(filter: #Predicate<Tasc> { $0.isDone == false },
-           sort: [
-            SortDescriptor(\Tasc.dateCreated, order: .forward)
-           ], animation: .snappy) private var allTascs: [Tasc]
+    @Query(filter: #Predicate<Tasc> { $0.isDone == false }, animation: .snappy) private var allTascs: [Tasc]
     
     init(selectedCategory: Category, taskListType: String) {
         self.selectedCategory = selectedCategory
@@ -76,6 +74,7 @@ struct TasklistView: View {
                             
                             Button() {
                                 tasc.isHighPriority.toggle()
+                                WidgetCenter.shared.reloadAllTimelines()
                             } label: {
                                 Image(systemName: "exclamationmark")
                                     .font(.system(size: 15))
@@ -86,6 +85,7 @@ struct TasklistView: View {
                             
                             Button() {
                                 tasc.isFlagged.toggle()
+                                WidgetCenter.shared.reloadAllTimelines()
                             } label: {
                                 Image(systemName: "flag")
                                     .foregroundColor(.white)
@@ -102,6 +102,7 @@ struct TasklistView: View {
                                 impactHeavy.impactOccurred()
                                 NotificationHandler.shared.removeNotifications(ids: [tasc.notificationID ?? ""])
                                 context.delete(tasc)
+                                WidgetCenter.shared.reloadAllTimelines()
                                 
                                 
                             } label: {
@@ -227,7 +228,7 @@ private extension [Tasc] {
         case .title:
             self.sorted(by: { $0.title < $1.title })
         case .date:
-            self.sorted(by: { $0.dateCreated < $1.dateCreated })
+            self.sorted(by: { $0.dueDate ?? Date() < $1.dueDate ?? Date() })
         }
     }
 }
